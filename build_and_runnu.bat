@@ -105,7 +105,7 @@ if %ERRORLEVEL% EQU 0 (
     echo Avvio dell'app sul dispositivo...
     
     REM Lancia l'app sul dispositivo Android
-    adb shell am start -n it.srik.TypeQ25/.MainActivity
+    adb shell am start -n ro.pastiera.typeq25/.MainActivity
     
     if %ERRORLEVEL% EQU 0 (
         echo.

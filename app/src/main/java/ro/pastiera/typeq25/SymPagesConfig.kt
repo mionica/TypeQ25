@@ -1,0 +1,10 @@
+package ro.pastiera.typeq25
+
+/**
+ * Configuration for SYM pages order and visibility.
+ */
+data class SymPagesConfig(
+    val emojiEnabled: Boolean = true,
+    val symbolsEnabled: Boolean = true,
+    val emojiFirst: Boolean = false
+)

@@ -53,11 +53,11 @@ tasks.register<IncrementBuildNumberTask>("incrementBuildNumber") {
 }
 
 android {
-    namespace = "it.srik.TypeQ25"
+    namespace = "ro.pastiera.typeq25"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "it.srik.TypeQ25"
+        applicationId = "ro.pastiera.typeq25"
         minSdk = 29
         targetSdk = 36
         versionCode = 5

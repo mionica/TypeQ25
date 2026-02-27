@@ -6,4 +6,4 @@
     android:canRetrieveWindowContent="true"
     android:description="@string/accessibility_service_description"
     android:notificationTimeout="100"
-    android:settingsActivity="it.srik.TypeQ25.MainActivity" />
+    android:settingsActivity="ro.pastiera.typeq25.MainActivity" />
