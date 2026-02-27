@@ -28,6 +28,7 @@ import android.widget.TextView
 import ro.pastiera.typeq25.DeviceManager
 import ro.pastiera.typeq25.R
 import ro.pastiera.typeq25.SettingsActivity
+import ro.pastiera.typeq25.SettingsManager
 import ro.pastiera.typeq25.inputmethod.StatusBarController
 import ro.pastiera.typeq25.inputmethod.TextSelectionHelper
 import ro.pastiera.typeq25.inputmethod.VariationButtonHandler
@@ -717,19 +718,22 @@ class VariationBarView(
         }
 
         // Add microphone button AFTER the scrollable area (fixed position)
-        val microphoneButton = microphoneButtonView ?: createMicrophoneButton(buttonWidth)
-        microphoneButtonView = microphoneButton
-        (microphoneButton.parent as? ViewGroup)?.removeView(microphoneButton)
-        val micParams = LinearLayout.LayoutParams(buttonWidth, buttonWidth).apply {
-            gravity = Gravity.CENTER_VERTICAL
-            setMargins(0, 0, micRightMargin, 0)
+        // UNLESS voice services are disabled altogether
+        if (! SettingsManager.getHideVoiceAltogether(context)) {
+            val microphoneButton = microphoneButtonView ?: createMicrophoneButton(buttonWidth)
+            microphoneButtonView = microphoneButton
+            (microphoneButton.parent as? ViewGroup)?.removeView(microphoneButton)
+            val micParams = LinearLayout.LayoutParams(buttonWidth, buttonWidth).apply {
+                gravity = Gravity.CENTER_VERTICAL
+                setMargins(0, 0, micRightMargin, 0)
+            }
+            containerView.addView(microphoneButton, micParams)
+            microphoneButton.setOnClickListener {
+                startSpeechRecognition(inputConnection)
+            }
+            microphoneButton.alpha = 1f
+            microphoneButton.visibility = View.VISIBLE
         }
-        containerView.addView(microphoneButton, micParams)
-        microphoneButton.setOnClickListener {
-            startSpeechRecognition(inputConnection)
-        }
-        microphoneButton.alpha = 1f
-        microphoneButton.visibility = View.VISIBLE
 
         if (variationsChanged) {
             animateVariationsIn(variationsRow)
